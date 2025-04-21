@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_app/firebase_options.dart';
+import 'package:insta_app/ui/pages/main/splash_page.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: 
+      home: SplashPage()
     );
   }
 }
