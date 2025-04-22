@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_app/ui/const/route.dart';
 import 'package:insta_app/ui/pages/auth/auth_page.dart';
+import 'package:insta_app/ui/pages/main/main_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -22,3 +23,5 @@ class SplashPage extends StatelessWidget {
     }
   }
 }
+
+

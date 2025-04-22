@@ -17,13 +17,21 @@ class AuthPage extends StatelessWidget {
             onTap: () {
               _authRepository.sendLink(_emailController.text);
             },
-            child: Container(margin: EdgeInsets.all(12), color: Colors.amber, child: Text('send')),
+            child: Container(
+              margin: EdgeInsets.all(12),
+              color: Colors.amber,
+              child: Text('send'),
+            ),
           ),
           InkWell(
             onTap: () {
               _authRepository.vrifyLink(_emailController.text);
             },
-            child: Container(margin: EdgeInsets.all(12), color: Colors.amber, child: Text('verify')),
+            child: Container(
+              margin: EdgeInsets.all(12),
+              color: Colors.amber,
+              child: Text('login'),
+            ),
           ),
         ],
       ),
