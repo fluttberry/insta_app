@@ -1,19 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_app/ui/const/route.dart';
+import 'package:insta_app/ui/pages/auth/auth_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    checkAuth(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkAuth(context);
+    });
     return Scaffold();
   }
-}
-checkAuth(context)async{
-  if (FirebaseAuth.instance.currentUser==null){
-    MRoute.push(context, AuthPage());
-  }else{
-    Mroute.push(context, MainPage());
+
+  checkAuth(context) {
+    if (FirebaseAuth.instance.currentUser == null) {
+      MRoute.push(context, AuthPage());
+    } else {
+      MRoute.push(context, MainPage());
+    }
   }
 }
