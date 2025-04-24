@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:insta_app/repository/auth_repository.dart';
 
-class AuthPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
-  TextEditingController _linkController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   AuthRepository _authRepository = AuthRepository();
 
   @override
@@ -13,20 +13,10 @@ class AuthPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(controller: _emailController),
-          TextField(controller: _linkController),
+          TextField(controller: _passwordController),
           InkWell(
             onTap: () {
-              _authRepository.sendLink(_emailController.text);
-            },
-            child: Container(
-              margin: EdgeInsets.all(12),
-              color: Colors.amber,
-              child: Text('send'),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              _authRepository.vrifyLink(_emailController.text);
+              _authRepository.login(_emailController.text, _passwordController.text );
             },
             child: Container(
               margin: EdgeInsets.all(12),
@@ -34,6 +24,7 @@ class AuthPage extends StatelessWidget {
               child: Text('login'),
             ),
           ),
+          
         ],
       ),
     );
