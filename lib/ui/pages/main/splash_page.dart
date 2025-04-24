@@ -17,7 +17,7 @@ class SplashPage extends StatelessWidget {
 
   checkAuth(context) {
     if (FirebaseAuth.instance.currentUser == null) {
-      MRoute.push(context, AuthPage());
+      MRoute.push(context, LoginPage());
     } else {
       MRoute.push(context, MainPage());
     }
