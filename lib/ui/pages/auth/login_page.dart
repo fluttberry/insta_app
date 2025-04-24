@@ -13,36 +13,69 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+       
         children: [
-          Text('Login'),
-          TextField(controller: _emailController),
-          TextField(controller: _passwordController),
-          InkWell(
-            onTap: () async {
-             var success = _authRepository.login(_emailController.text, _passwordController.text );
-             if (success == true){
-              MRoute.replce(context, MainPage());
-             }
-            },
-            child: Container(
-              margin: EdgeInsets.all(12),
-              color: Colors.amber,
-              child: Text('login'),
+          SizedBox(height: 40),
+          Text(
+            'Login',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+          Spacer(flex: 1),
+          Container(
+            height: 42,
+            width: 240,
+            color: Colors.grey.shade300,
+            child: TextField(controller: _emailController),
+          ),
+          SizedBox(height: 40),
+          Container(
+            height: 42,
+            width: 240,
+            color: Colors.grey.shade300,
+            child: TextField(controller: _passwordController),
+          ),
+          SizedBox(height: 40),
+
+          Container(
+            height: 42,
+            width: 240,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.grey.shade300,
+            ),
+            child: InkWell(
+              onTap: () async {
+                var success = _authRepository.login(
+                  _emailController.text,
+                  _passwordController.text,
+                );
+                if (success == true) {
+                  MRoute.replce(context, MainPage());
+                }
+              },
+              child: Center(child: Text('login')),
             ),
           ),
-          
-          InkWell(
-            onTap: () {
-              MRoute.push(context, RegistrationPage());
-            },
-            child: Container(
-              margin: EdgeInsets.all(12),
-              color: Colors.amber,
-              child: Text('registration'),
+          Spacer(flex: 1),
+          SizedBox(height: 20),
+          Text('Not have account yet?'),
+          SizedBox(height: 5),
+
+          Container(
+            height: 42,
+            width: 240,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.grey.shade300,
+            ),
+            child: InkWell(
+              onTap: () {
+                MRoute.push(context, RegistrationPage());
+              },
+              child: Center(child: Text('registration')),
             ),
           ),
-          
+          SizedBox(height: 20),
         ],
       ),
     );
