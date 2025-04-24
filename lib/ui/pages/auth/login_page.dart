@@ -31,19 +31,10 @@ class LoginPage extends StatelessWidget {
               child: Text('login'),
             ),
           ),
+          
           InkWell(
             onTap: () {
               MRoute.push(context, RegistrationPage());
-            },
-            child: Container(
-              margin: EdgeInsets.all(12),
-              color: Colors.amber,
-              child: Text('login'),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              MRoute.push(context, LoginPage());
             },
             child: Container(
               margin: EdgeInsets.all(12),
