@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_app/repository/auth_repository.dart';
 
 class AuthPage extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
