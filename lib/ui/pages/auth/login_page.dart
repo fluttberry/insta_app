@@ -4,10 +4,20 @@ import 'package:insta_app/ui/const/route.dart';
 import 'package:insta_app/ui/pages/auth/registration_page.dart';
 import 'package:insta_app/ui/pages/main/main_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+   
+    return _LoginPage();
+  }
+}
+class _LoginPage extends State <LoginPage> {
+  
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   AuthRepository _authRepository = AuthRepository();
+  bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +25,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
        
         children: [
-          SizedBox(height: 40),
+          SizedBox(height: 40, width: double.infinity,),
           Text(
             'Login',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
@@ -32,7 +42,21 @@ class LoginPage extends StatelessWidget {
             height: 42,
             width: 240,
             color: Colors.grey.shade300,
-            child: TextField(controller: _passwordController),
+            child: TextField(controller: _passwordController, 
+             obscureText: hidePassword,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      hidePassword = !hidePassword;
+                    });
+                  },
+                  icon: Icon(
+                    hidePassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ),
+            ),
           ),
           SizedBox(height: 40),
 
@@ -45,9 +69,10 @@ class LoginPage extends StatelessWidget {
             ),
             child: InkWell(
               onTap: () async {
-                var success = _authRepository.login(
+                var success = await _authRepository.login(
                   _emailController.text,
                   _passwordController.text,
+                 
                 );
                 if (success == true) {
                   MRoute.replce(context, MainPage());
@@ -80,4 +105,5 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -7,13 +7,13 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-    throw Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           Text('Home'),
           ElevatedButton(
             onPressed: () async {
-              MRoute.replce(context, LoginPage);
+              MRoute.replce(context, LoginPage());
               await FirebaseAuth.instance.signOut();
             },
             child: Text('Exit'),
