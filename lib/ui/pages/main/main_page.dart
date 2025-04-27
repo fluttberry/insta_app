@@ -1,38 +1,37 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:insta_app/ui/const/route.dart';
-import 'package:insta_app/ui/pages/auth/login_page.dart';
 import 'package:insta_app/ui/pages/main/add_post_screen.dart';
 import 'package:insta_app/ui/pages/main/chat_screen.dart';
 import 'package:insta_app/ui/pages/main/profile_screen.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MainPage();
+  }
+}
+
+class _MainPage extends State<MainPage> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        //index: index,
+        index: index,
         children: [
+          Center(child: Text('Home')),
           AddPostScreen(),
           ChatScreen(),
           ProfileScreen(),
-         // Column(
-            //children: [
-              // ElevatedButton(
-              //   onPressed: () async {
-              //     MRoute.replce(context, LoginPage());
-              //     await FirebaseAuth.instance.signOut();
-              //   },
-              //   child: Text('Exit'),
-              // ),
-            //],
-          //),
+          Column(children: []),
         ],
       ),
-bottomNavigationBar: BottomNavigationBar(
-  showSelectedLabels: false,
+
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
         showUnselectedLabels: false,
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: Colors.grey,
         onTap: (i) {
           setState(() {
             index = i;
@@ -41,27 +40,49 @@ bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/Explore_Active.png',
-              color: index == 0 ? Color(0xffBE52F2) : Colors.grey,
+              'assets/icons/Rectangle.png',
+              color: index == 0 ? Colors.blue : Colors.black,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/Map_Inactive.png',
-              color: index == 1 ? Color(0xffBE52F2) : Colors.grey,
+              'assets/icons/Vector.png',
+              color: index == 1 ? Colors.blue : Colors.black,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/Profile_Inactive.png',
-              color: index == 2 ? Color(0xffBE52F2) : Colors.grey,
+              'assets/icons/Chat.png',
+              color: index == 2 ? Colors.blue : Colors.black,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/icons/User.png',
+              color: index == 3 ? Colors.blue : Colors.black,
             ),
             label: '',
           ),
         ],
-),
+      ),
     );
   }
 }
+
+
+
+
+// Column(
+          //children: [
+          // ElevatedButton(
+          //   onPressed: () async {
+          //     MRoute.replce(context, LoginPage());
+          //     await FirebaseAuth.instance.signOut();
+          //   },
+          //   child: Text('Exit'),
+          // ),
+          //],
+          //),
