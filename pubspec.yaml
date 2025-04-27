@@ -21,3 +21,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+assets:
+  - assets/icons/Chat.png
+  - assets/icons/Rectangle.png
+  - assets/icons/User.png
+  - assets/icons/Vector.png
