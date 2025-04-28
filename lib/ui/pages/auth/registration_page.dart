@@ -9,9 +9,9 @@ class RegistrationPage extends StatefulWidget {
   }
 }
 class _RegistrationPage extends State<RegistrationPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  AuthRepository _authRepository = AuthRepository();
+ final TextEditingController _emailController = TextEditingController();
+ final TextEditingController _passwordController = TextEditingController();
+ final AuthRepository _authRepository = AuthRepository();
   bool hidePassword = true;
   @override
   Widget build(BuildContext context) {

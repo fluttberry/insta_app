@@ -29,9 +29,11 @@ class _MainPage extends State<MainPage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.amber,
+
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        backgroundColor: Colors.grey,
+        
         onTap: (i) {
           setState(() {
             index = i;
@@ -43,28 +45,28 @@ class _MainPage extends State<MainPage> {
               'assets/icons/Rectangle.png',
               color: index == 0 ? Colors.blue : Colors.black,
             ),
-            label: '',
+            label: 'home',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/Vector.png',
               color: index == 1 ? Colors.blue : Colors.black,
             ),
-            label: '',
+            label: 'add post',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/Chat.png',
               color: index == 2 ? Colors.blue : Colors.black,
             ),
-            label: '',
+            label: 'chat',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/User.png',
               color: index == 3 ? Colors.blue : Colors.black,
             ),
-            label: '',
+            label: 'profile',
           ),
         ],
       ),

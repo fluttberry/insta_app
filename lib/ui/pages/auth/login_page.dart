@@ -5,27 +5,26 @@ import 'package:insta_app/ui/pages/auth/registration_page.dart';
 import 'package:insta_app/ui/pages/main/main_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
-   
     return _LoginPage();
   }
 }
-class _LoginPage extends State <LoginPage> {
-  
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  AuthRepository _authRepository = AuthRepository();
+class _LoginPage extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final AuthRepository _authRepository = AuthRepository();
   bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-       
         children: [
-          SizedBox(height: 40, width: double.infinity,),
+          SizedBox(height: 40, width: double.infinity),
           Text(
             'Login',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
@@ -42,8 +41,9 @@ class _LoginPage extends State <LoginPage> {
             height: 42,
             width: 240,
             color: Colors.grey.shade300,
-            child: TextField(controller: _passwordController, 
-             obscureText: hidePassword,
+            child: TextField(
+              controller: _passwordController,
+              obscureText: hidePassword,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -72,7 +72,6 @@ class _LoginPage extends State <LoginPage> {
                 var success = await _authRepository.login(
                   _emailController.text,
                   _passwordController.text,
-                 
                 );
                 if (success == true) {
                   MRoute.replce(context, MainPage());
@@ -105,5 +104,4 @@ class _LoginPage extends State <LoginPage> {
       ),
     );
   }
-
 }
