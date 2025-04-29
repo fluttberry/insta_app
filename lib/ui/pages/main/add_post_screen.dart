@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
@@ -8,8 +11,39 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+  XFile? image1;
+  XFile? image2;
+  XFile? image3;
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Add Post Scree'));
+    return Column(
+      children: [
+        Text('Add'),
+        Row(
+          children: [
+            InkWell(
+              onTap: () async {
+                var img = await ImagePicker ().pickImage(source: ImageSource.gallery);
+              },
+              child: Container(
+                width: 100,
+                height: 100,
+                child: image1 != null ? Image.file(File(image1!.path)) : null,
+              ),
+            ),
+            Container(
+              width: 100,
+              height: 100,
+              child: image2 != null ? Image.file(File(image2!.path)) : null,
+            ),
+            Container(
+              width: 100,
+              height: 100,
+              child: image3 != null ? Image.file(File(image3!.path)) : null,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
