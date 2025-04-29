@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_app/ui/pages/main/add_post_screen.dart';
 import 'package:insta_app/ui/pages/main/chat_screen.dart';
+import 'package:insta_app/ui/pages/main/home_screen.dart';
 import 'package:insta_app/ui/pages/main/profile_screen.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _MainPage extends State<MainPage> {
       body: IndexedStack(
         index: index,
         children: [
-          Center(child: Text('Home')),
+          HomeScreen(),
           AddPostScreen(),
           ChatScreen(),
           ProfileScreen(),
@@ -45,28 +46,28 @@ class _MainPage extends State<MainPage> {
               'assets/icons/Rectangle.png',
               color: index == 0 ? Colors.blue : Colors.black,
             ),
-            label: 'home',
+            label: '', 
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/Vector.png',
               color: index == 1 ? Colors.blue : Colors.black,
             ),
-            label: 'add post',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/Chat.png',
               color: index == 2 ? Colors.blue : Colors.black,
             ),
-            label: 'chat',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/User.png',
               color: index == 3 ? Colors.blue : Colors.black,
             ),
-            label: 'profile',
+            label: '',
           ),
         ],
       ),
