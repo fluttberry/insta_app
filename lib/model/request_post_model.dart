@@ -9,4 +9,14 @@ class RequestPostModel {
   String text;
 RequestPostModel ({required this.image1, required this.image2, required this.image3, required this.user, required this.text,});
 
+Map<String, dynamic> toJson(image1Url, image2Url, image3Url) {
+    return {
+      'image1': image1Url,
+      'image2': image2Url,
+      'image3': image3Url,
+      'user': user,
+      'text': text,
+    };
+  }
+
 } 
