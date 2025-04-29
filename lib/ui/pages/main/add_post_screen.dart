@@ -14,6 +14,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
   XFile? image1;
   XFile? image2;
   XFile? image3;
+
+  TextEditingController desController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +26,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
           children: [
             InkWell(
               onTap: () async {
-                var img = await ImagePicker ().pickImage(source: ImageSource.gallery);
+                var img = await ImagePicker().pickImage(
+                  source: ImageSource.gallery, imageQuality: 50
+                );
+                if (img != null) {
+                  setState(() {
+                    image1 = img;
+                  });
+                }
               },
               child: Container(
                 width: 100,
@@ -43,7 +53,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
           ],
         ),
+        TextFormField(controller: desController),
+        ElevatedButton(onPressed: () {}, child: Text('Post')),
       ],
-    );
+    ); 
   }
 }
