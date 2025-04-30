@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/model/request_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
+import 'package:insta_app/ui/pages/main/home_screen.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
@@ -17,6 +18,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   XFile? image1;
   XFile? image2;
   XFile? image3;
+  
 
   TextEditingController desController = TextEditingController();
   final PostRepository _postRepository = PostRepository();
@@ -71,7 +73,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   width: 100,
                   height: 100,
                   color: Colors.grey.shade300,
-                  child: image2 != null ? Image.file(File(image2!.path)) : null,
+                  child: image2 != null ? Image.network(image2!.path) : null,
                 ),
               ),
               InkWell(
@@ -90,7 +92,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   width: 100,
                   height: 100,
                   color: Colors.grey.shade300,
-                  child: image3 != null ? Image.file(File(image3!.path)) : null,
+                  child: image3 != null ? Image.network(image3!.path) : null,
                 ),
               ),
             ],
@@ -118,9 +120,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 image2: image2,
                 image3: image3,
                 user: FirebaseAuth.instance.currentUser!.uid,
-                text: desController.text,
+                text: desController.text 
               );
-              _postRepository.post(post);
+              _postRepository.post(post) | Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
             },
             child: Center(child: Text('Post')),
           ),
