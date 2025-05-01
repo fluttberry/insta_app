@@ -18,25 +18,27 @@ class _AddPostScreenState extends State<AddPostScreen> {
   XFile? image1;
   XFile? image2;
   XFile? image3;
-  
 
   TextEditingController desController = TextEditingController();
   final PostRepository _postRepository = PostRepository();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Add',
-          // textDirection: TextDirection.ltr,
-          style: TextStyle(fontSize: 32),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 53, right: 53),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+    return Padding(
+      padding: const EdgeInsets.all(30),
+      child: Column(
+        
+        children: [
+          Align( alignment: Alignment.topLeft,
+            child: Text(
+              'Add',
+              // textDirection: TextDirection.ltr,
+              style: TextStyle(fontSize: 32),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                
             children: [
               InkWell(
                 onTap: () async {
@@ -97,37 +99,42 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ),
             ],
           ),
-        ),
-        SizedBox(height: 20),
-        Container(
-          width: 346,
-          height: 144,
-          color: Colors.grey.shade300,
-          child: TextFormField(controller: desController),
-        ),
-        SizedBox(height: 20),
-        Container(
-          height: 53,
-          width: 346,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+          SizedBox(height: 20),
+          Container(
             color: Colors.grey.shade300,
+            child: TextFormField(
+              decoration: InputDecoration(border: InputBorder.none),
+              controller: desController,
+              maxLines: 5,
+            ),
           ),
-          child: InkWell(
-            onTap: () {
-              RequestPostModel post = RequestPostModel(
-                image1: image1,
-                image2: image2,
-                image3: image3,
-                user: FirebaseAuth.instance.currentUser!.uid,
-                text: desController.text 
-              );
-              _postRepository.post(post) | Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-            },
-            child: Center(child: Text('Post')),
+          SizedBox(height: 20),
+          Container(
+            height: 53,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.grey.shade300,
+            ),
+            child: InkWell(
+              onTap: () {
+                RequestPostModel post = RequestPostModel(
+                  image1: image1,
+                  image2: image2,
+                  image3: image3,
+                  user: FirebaseAuth.instance.currentUser!.uid,
+                  text: desController.text,
+                );
+                _postRepository.post(post) |
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+              },
+              child: Center(child: Text('Post')),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
