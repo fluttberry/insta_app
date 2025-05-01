@@ -10,6 +10,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Home'));
+    return ListView.builder(itemBuilder: (context, index){
+
+    });
   }
 }

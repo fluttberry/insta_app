@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/model/request_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
+import 'package:insta_app/ui/const/route.dart';
 import 'package:insta_app/ui/pages/main/home_screen.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -27,9 +28,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
     return Padding(
       padding: const EdgeInsets.all(30),
       child: Column(
-        
         children: [
-          Align( alignment: Alignment.topLeft,
+          Align(
+            alignment: Alignment.topLeft,
             child: Text(
               'Add',
               // textDirection: TextDirection.ltr,
@@ -38,7 +39,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                
+
             children: [
               InkWell(
                 onTap: () async {
@@ -116,7 +117,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               color: Colors.grey.shade300,
             ),
             child: InkWell(
-              onTap: () {
+              onTap: () async {
                 RequestPostModel post = RequestPostModel(
                   image1: image1,
                   image2: image2,
@@ -124,17 +125,36 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   user: FirebaseAuth.instance.currentUser!.uid,
                   text: desController.text,
                 );
-                _postRepository.post(post) |
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
+                loading();
+                await _postRepository.post(post);
+                if (context.mounted) {
+                  MRoute.pop(context);
+                }
+                clear();
+                //| Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen()),);
               },
               child: Center(child: Text('Post')),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  clear() {
+    desController.clear();
+    image1 = null;
+    image2 = null;
+    image3 = null;
+    setState(() {});
+  }
+
+  loading() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(child: Container(child: CircularProgressIndicator()));
+      },
     );
   }
 }

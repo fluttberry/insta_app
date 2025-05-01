@@ -1,10 +1,11 @@
 import 'package:insta_app/model/request_post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:insta_app/model/response_post_model.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
 class PostRepository {
-  post(RequestPostModel post) async {
+ Future <void> post(RequestPostModel post) async {
     String image1Url = '';
     String image2Url = '';
     String image3Url = '';
@@ -33,8 +34,19 @@ class PostRepository {
       await storage.putData(byte);
       image3Url = await storage.getDownloadURL();
     }
-    FirebaseFirestore.instance
+    await  FirebaseFirestore.instance
         .collection('posts')
         .add(post.toJson(image1Url, image2Url, image3Url));
   }
+  Future <List<ResponsePostModel>> getPosts () async{
+    List<ResponsePostModel> posts = [];
+var docs = await FirebaseFirestore.instance.collection('posts').limit(5).get();
+for (var doc in docs.docs){
+ResponsePostModel post = ResponsePostModel.fromJson(doc.data());
+post.id = doc.id;
+posts.add(post);
 }
+return posts;
+  }
+}
+ 
