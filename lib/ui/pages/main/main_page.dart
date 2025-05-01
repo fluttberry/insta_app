@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_app/ui/pages/main/add_post_screen.dart';
 import 'package:insta_app/ui/pages/main/chat_screen.dart';
-import 'package:insta_app/ui/pages/main/home_screen.dart';
+import 'package:insta_app/ui/pages/main/home/home_screen.dart';
 import 'package:insta_app/ui/pages/main/profile_screen.dart';
 
 class MainPage extends StatefulWidget {
