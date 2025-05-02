@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/model/request_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
 import 'package:insta_app/ui/const/route.dart';
-import 'package:insta_app/ui/pages/main/home/home_screen.dart';
+
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});

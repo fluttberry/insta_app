@@ -4,6 +4,7 @@ import 'package:insta_app/firebase_options.dart';
 import 'package:insta_app/ui/pages/main/splash_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
