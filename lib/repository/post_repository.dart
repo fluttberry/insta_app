@@ -40,7 +40,7 @@ class PostRepository {
   }
   Future <List<ResponsePostModel>> getPosts () async{
     List<ResponsePostModel> posts = [];
-var docs = await FirebaseFirestore.instance.collection('posts').limit(5).get();
+var docs = await FirebaseFirestore.instance.collection('posts').limit(10).get();
 for (var doc in docs.docs){
 ResponsePostModel post = ResponsePostModel.fromJson(doc.data());
 post.id = doc.id;
