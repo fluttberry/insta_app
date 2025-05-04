@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-
 class ResponsePostModel {
   String id;
   String image1;
@@ -17,8 +14,7 @@ class ResponsePostModel {
     required this.text,
   });
 
-  factory ResponsePostModel.fromJson(map ) {
-   
+  factory ResponsePostModel.fromJson(map) {
     return ResponsePostModel(
       id: '',
       image1: map['image1'],

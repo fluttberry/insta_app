@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ResponsePostModel> posts = [];
-  PostRepository _postRepository = PostRepository();
+  final PostRepository _postRepository = PostRepository();
   @override
   void initState() {
     super.initState();
