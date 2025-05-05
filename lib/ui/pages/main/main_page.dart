@@ -18,15 +18,17 @@ class _MainPage extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: index,
-        children: [
-          HomeScreen(),
-          AddPostScreen(),
-          ChatScreen(),
-          ProfileScreen(),
-          Column(children: []),
-        ],
+      body: SafeArea(
+        child: IndexedStack(
+          index: index,
+          children: [
+            HomeScreen(),
+            AddPostScreen(),
+            ChatScreen(),
+            ProfileScreen(),
+            Column(children: []),
+          ],
+        ),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
