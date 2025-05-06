@@ -1,27 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:insta_app/model/user_model.dart';
+import 'package:insta_app/model/profile_model.dart';
 
 class ProfileRepository {
-  getProfile () {
+  getProfile() {}
 
-  }
-
-  editProfile (String id, UserModel user)async{
-String image = '';
-
-    if (user.localImage != null) {
+  editProfile(String id, ProfileModel profile) async {
+    if (profile.localImage != null) {
       var storage = FirebaseStorage.instance.ref().child(
-        'fluttberry/profile/${DateTime.now().millisecondsSinceEpoch}.png',
+        'fluttberry/users/${DateTime.now().millisecondsSinceEpoch}.png',
       );
-      var byte =await user.localImage! .readAsBytes();
+      var byte = await profile.localImage!.readAsBytes();
       await storage.putData(byte);
-      image = await storage.getDownloadURL();
+      profile.image = await storage.getDownloadURL();
     }
-    
-    await  FirebaseFirestore.instance
+
+    await FirebaseFirestore.instance
         .collection('users')
-        .add(user.toMap(image));
-  
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set(profile.toMap());
   }
-} 
+}
