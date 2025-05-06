@@ -1,8 +1,5 @@
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/model/profile_model.dart';
@@ -72,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     child:
                         image != null
-                            ? Image.file(File(image!.path), fit: BoxFit.cover,)
+                            ? Image.file(File(image!.path), fit: BoxFit.cover)
                             : profileModel?.image.isNotEmpty == true
                             ? Image.network(profileModel!.image)
                             : null,
@@ -131,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     nickname: nicknameController.text,
                     city: cityController.text,
                     localImage: image,
-                    image: this.profileModel?.image??'',
+                    image: this.profileModel?.image ?? '',
                   );
                   _repository.editProfile(profileModel);
                 },
