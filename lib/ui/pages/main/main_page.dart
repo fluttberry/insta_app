@@ -19,15 +19,21 @@ class _MainPage extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: IndexedStack(
-          index: index,
-          children: [
-            HomeScreen(),
-            AddPostScreen(),
-            ChatScreen(),
-            ProfileScreen(),
-            Column(children: []),
-          ],
+        child: InkWell(
+          splashColor: Colors.transparent,
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: IndexedStack(
+            index: index,
+            children: [
+              HomeScreen(),
+              AddPostScreen(),
+              ChatScreen(),
+              ProfileScreen(),
+              Column(children: []),
+            ],
+          ),
         ),
       ),
 

@@ -29,10 +29,10 @@ class ProfileModel {
 
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
     return ProfileModel(
-      name: map['name'] as String,
-      nickname: map['nickname'] as String,
-      city: map['city'] as String,
-      image: map['image'] as String,
+      name: map['name'] ??'',
+      nickname: map['nickname'] ??'',
+      city: map['city'] ??'',
+      image: map['image'] ??'',
       localImage: null,
     );
   }

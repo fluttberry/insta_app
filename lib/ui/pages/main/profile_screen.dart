@@ -36,6 +36,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var profile = await _repository.getProfile();
     setState(() {
       profile = profile;
+      nameController.text = profile.name;
+      nicknameController.text = profile.nickName;
+      cityController.text = profile.city;
     });
   }
 
@@ -69,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     child:
                         image != null
-                            ? Image.file(File(image!.path))
+                            ? Image.file(File(image!.path), fit: BoxFit.cover,)
                             : profileModel?.image.isNotEmpty == true
                             ? Image.network(profileModel!.image)
                             : null,
@@ -128,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     nickname: nicknameController.text,
                     city: cityController.text,
                     localImage: image,
-                    image: '',
+                    image: this.profileModel?.image??'',
                   );
                   _repository.editProfile(profileModel);
                 },
