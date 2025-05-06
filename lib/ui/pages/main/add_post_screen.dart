@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/model/request_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
 import 'package:insta_app/ui/const/route.dart';
+import 'package:insta_app/ui/widget/mbutton.dart';
 
 
 class AddPostScreen extends StatefulWidget {
@@ -116,9 +117,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
               borderRadius: BorderRadius.circular(25),
               color: Colors.grey.shade300,
             ),
-            child: InkWell(
-              onTap: () async {
-                RequestPostModel post = RequestPostModel(
+            child: 
+            MButton(onTap: ()async{
+              RequestPostModel post = RequestPostModel(
                   image1: image1,
                   image2: image2,
                   image3: image3,
@@ -131,10 +132,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   MRoute.pop(context);
                 }
                 clear();
-                //| Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen()),);
-              },
-              child: Center(child: Text('Post')),
-            ),
+            }, text: 'Post')
+            
           ),
         ],
       ),

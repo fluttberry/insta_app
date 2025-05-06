@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:insta_app/repository/profile_repository.dart';
 import 'package:insta_app/ui/const/route.dart';
 import 'package:insta_app/ui/pages/auth/login_page.dart';
+import 'package:insta_app/ui/widget/mbutton.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -30,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 112,
                 width: 112,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
+                  shape: BoxShape.circle,
                   color: Colors.grey.shade300,
                 ),
               ),
@@ -45,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       hintText: 'Name...',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
+                    controller: nameController,
                   ),
                 ),
               ),
@@ -59,6 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       hintText: 'Nickname...',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
+                    controller: nicknameController,
                   ),
                 ),
               ),
@@ -77,34 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                height: 50,
-
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.grey.shade300,
-                ),
-                child: InkWell(
-                  onTap: () {},
-                  child: Center(child: Text('Save')),
-                ),
-              ),
+              MButton(onTap: () {}, text: 'Save'),
               SizedBox(height: 20),
-
-              Container(
-                height: 50,
-
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.grey.shade300,
-                ),
-                child: InkWell(
-                  onTap: () async {
-                    MRoute.replce(context, LoginPage());
-                    await FirebaseAuth.instance.signOut();
-                  },
-                  child: Center(child: Text('Log out')),
-                ),
+              MButton(
+                onTap: () async {
+                  MRoute.replce(context, LoginPage());
+                  await FirebaseAuth.instance.signOut();
+                },
+                text: 'Log out',
               ),
             ],
           ),
