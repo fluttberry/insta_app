@@ -3,7 +3,7 @@ import 'package:insta_app/model/request_post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:insta_app/model/response_post_model.dart';
-import 'package:insta_app/repository/profile_repository.dart';
+
 // import 'package:firebase_core/firebase_core.dart';
 
 class PostRepository {
@@ -41,7 +41,7 @@ class PostRepository {
         .add(post.toJson(image1Url, image2Url, image3Url));
   }
 
-  Future<List<ResponsePostModel>> getPosts(String user) async {
+  Future<List<ResponsePostModel>> getPosts() async {
     List<ResponsePostModel> posts = [];
     var docs =
         await FirebaseFirestore.instance.collection('posts').limit(10).get();

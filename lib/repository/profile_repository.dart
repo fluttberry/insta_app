@@ -6,7 +6,7 @@ import 'package:insta_app/model/profile_model.dart';
 class ProfileRepository {
   getProfile() {}
 
-  editProfile(String id, ProfileModel profile) async {
+  editProfile( ProfileModel profile) async {
     if (profile.localImage != null) {
       var storage = FirebaseStorage.instance.ref().child(
         'fluttberry/users/${DateTime.now().millisecondsSinceEpoch}.png',

@@ -15,7 +15,7 @@ class ProfileModel {
     required this.name,
     required this.nickname,
     required this.city,
-    required this.localImage,
+     this.localImage,
     required this.image,
   });
 

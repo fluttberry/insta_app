@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
     for (var post in posts) {
       if (!profiles.map((profile) => profile.id).contains(post.user)) {
-        var user = await _postRepository.getPosts(post.user);
+        var user = await _postRepository.getUser(post.user);
         profiles.add(user);
       }
     }
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           nickname: '_',
                           city: '_',
                           image: '_',
-                          localImage: null, // to clarify???????????????????????????????????????????
+                          
                         ),
                   );
         return Column(
@@ -58,12 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
               
                   user.nickname,
             ),
-            if ((posts[index].image1.isNotEmpty))
-              Image.network(posts[index].image1),
+            if ((post.image1.isNotEmpty))
+              Image.network(post.image1),
             Row(
               children: [
-
-                Text(posts[index].text),
+                user.image.isNotEmpty ? Image.network(user.image, width: 50, height: 50,) : Text('no'), Text(post.text),
+                
               ],
             ),
           ],
