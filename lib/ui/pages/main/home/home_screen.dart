@@ -30,9 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (context, index) {
         return Column(
           children: [
-            Text(posts[index].text),
+            Text(posts[index].user),
             if ((posts[index].image1.isNotEmpty))
               Image.network(posts[index].image1),
+              Text(posts[index].text),
           ],
         );
       },
