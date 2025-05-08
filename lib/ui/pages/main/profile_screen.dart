@@ -30,11 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getProfile() async {
-    var profile = await _repository.getProfile();
+    ProfileModel profile = await _repository.getProfile();
     setState(() {
       profile = profile;
       nameController.text = profile.name;
-      nicknameController.text = profile.nickName;
+      nicknameController.text = profile.nickname;
       cityController.text = profile.city;
     });
   }

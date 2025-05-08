@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:insta_app/model/profile_model.dart';
 import 'package:insta_app/model/response_post_model.dart';
@@ -38,32 +37,24 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
-        var post = posts [index];
-        var user = profiles
-                  .firstWhere(
-                    (profile) => profile.id == post.user,
-                    orElse:
-                        () => ProfileModel(
-                          name: '_',
-                          nickname: '_',
-                          city: '_',
-                          image: '_',
-                          
-                        ),
-                  );
+        var post = posts[index];
+        var user = profiles.firstWhere(
+          (profile) => profile.id == post.user,
+          orElse:
+              () =>
+                  ProfileModel(name: '_', nickname: '_', city: '_', image: '_'),
+        );
         return Column(
           children: [
             Image.network(''),
-            Text(
-              
-                  user.nickname,
-            ),
-            if ((post.image1.isNotEmpty))
-              Image.network(post.image1),
+            Text(user.nickname),
+            if ((post.image1.isNotEmpty)) Image.network(post.image1),
             Row(
               children: [
-                user.image.isNotEmpty ? Image.network(user.image, width: 50, height: 50,) : Text('no'), Text(post.text),
-                
+                user.image.isNotEmpty
+                    ? Image.network(user.image, width: 50, height: 50)
+                    : Text('no'),
+                Text(post.text),
               ],
             ),
           ],
