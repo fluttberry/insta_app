@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:insta_app/model/profile_model.dart';
 import 'package:insta_app/model/response_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
 
@@ -11,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ResponsePostModel> posts = [];
+  List<ProfileModel> profiles = [];
   final PostRepository _postRepository = PostRepository();
   @override
   void initState() {
@@ -21,6 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
   getData() async {
     posts = await _postRepository.getPosts();
     setState(() {});
+    for (var post in posts) {
+      if (!profiles.map((profile) => profile.id).contains(post.user)) {
+        var user = await _postRepository.getPosts(post.user);
+        profiles.add(user);
+      }
+    }
+    setState(() {});
   }
 
   @override
@@ -28,12 +38,34 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
+        var post = posts [index];
+        var user = profiles
+                  .firstWhere(
+                    (profile) => profile.id == post.user,
+                    orElse:
+                        () => ProfileModel(
+                          name: '_',
+                          nickname: '_',
+                          city: '_',
+                          image: '_',
+                          localImage: null, // to clarify???????????????????????????????????????????
+                        ),
+                  );
         return Column(
           children: [
-            Text(posts[index].user),
+            Image.network(''),
+            Text(
+              
+                  user.nickname,
+            ),
             if ((posts[index].image1.isNotEmpty))
               Image.network(posts[index].image1),
-              Text(posts[index].text),
+            Row(
+              children: [
+
+                Text(posts[index].text),
+              ],
+            ),
           ],
         );
       },

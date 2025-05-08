@@ -41,7 +41,7 @@ class PostRepository {
         .add(post.toJson(image1Url, image2Url, image3Url));
   }
 
-  Future<List<ResponsePostModel>> getPosts() async {
+  Future<List<ResponsePostModel>> getPosts(String user) async {
     List<ResponsePostModel> posts = [];
     var docs =
         await FirebaseFirestore.instance.collection('posts').limit(10).get();
@@ -54,9 +54,10 @@ class PostRepository {
   }
 
   Future<ProfileModel> getUser(String id) async {
-    var doc =
-        await FirebaseFirestore.instance.collection('users').doc(id).get();
+    var doc = await FirebaseFirestore.instance.collection('users').doc(id).get();
 
-    return ProfileModel.fromMap(doc.data()!);
+    var profile = ProfileModel.fromMap(doc.data()!);
+    profile.id = doc.id;
+    return profile;
   }
 }
