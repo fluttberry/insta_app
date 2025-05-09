@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:insta_app/model/response_post_model.dart';
 
-// import 'package:firebase_core/firebase_core.dart';
-
 class PostRepository {
   Future<void> post(RequestPostModel post) async {
     String image1Url = '';
@@ -53,9 +51,9 @@ class PostRepository {
     return posts;
   }
 
-  Future<ProfileModel> getUser(String id) async {
+  Future<ProfileModel?> getUser(String id) async {
     var doc = await FirebaseFirestore.instance.collection('users').doc(id).get();
-
+if (doc.data() == null) return null;
     var profile = ProfileModel.fromMap(doc.data()!);
     profile.id = doc.id;
     return profile;

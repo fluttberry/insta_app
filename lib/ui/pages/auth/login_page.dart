@@ -37,7 +37,7 @@ class _LoginPage extends State<LoginPage> {
               height: 42,
               width: 240,
               color: Colors.grey.shade300,
-              child: TextField(controller: _emailController),
+              child: TextField(controller: _emailController, keyboardType: TextInputType.emailAddress,),
             ),
             SizedBox(height: 40),
             Container(
@@ -65,7 +65,7 @@ class _LoginPage extends State<LoginPage> {
             MButton(
               onTap: () async {
                 var success = await _authRepository.login(
-                  _emailController.text,
+                  _emailController.text, 
                   _passwordController.text,
                 );
                 if (success == true) {
