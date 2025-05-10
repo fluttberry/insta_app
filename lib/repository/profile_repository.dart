@@ -4,9 +4,20 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:insta_app/model/profile_model.dart';
 
 class ProfileRepository {
-  getProfile() {}
+  Future<ProfileModel?> getProfile() async {
+    var doc =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+    if (doc.data() != null) {
+      return ProfileModel.fromMap(doc.data()!);
+    } else {
+      return null;
+    }
+  }
 
-  editProfile( ProfileModel profile) async {
+  editProfile(ProfileModel profile) async {
     if (profile.localImage != null) {
       var storage = FirebaseStorage.instance.ref().child(
         'fluttberry/users/${DateTime.now().millisecondsSinceEpoch}.png',
