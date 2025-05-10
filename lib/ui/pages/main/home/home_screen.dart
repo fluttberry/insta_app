@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 user.image.isNotEmpty
                     ? Image.network(user.image, width: 50, height: 50)
-                    : Text('no'),
+                    : Icon(Icons.person),
                 Text(user.name),
               ],
             ),
