@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ChatModel {
 String fromUser;
 String text;
+Timestamp? createdAt;
   ChatModel({
     required this.fromUser,
     required this.text,
