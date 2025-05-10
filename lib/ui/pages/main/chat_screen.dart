@@ -37,14 +37,18 @@ class _ChatScreenState extends State<ChatScreen> {
         });
     super.initState();
   }
-  getUser (id)async{
-    if (!profiles.map((pro)=>pro.id).contains(id)){
-            var user = await  _repository.getUser(id);
-            if (user != null) {
-              profiles.add(user);
-            }
-            
-            }
+
+  getUser(id) async {
+    if (!profiles.map((pro) => pro.id).contains(id)) {
+      var user = await _repository.getUser(id);
+      if (!profiles.map((pro) => pro.id).contains(id)) {
+        if (user != null) {
+          setState(() {
+            profiles.add(user);
+          });
+        }
+      }
+    }
   }
 
   @override
@@ -55,12 +59,30 @@ class _ChatScreenState extends State<ChatScreen> {
           child: ListView.builder(
             itemCount: chats.length,
             itemBuilder: (context, index) {
+              var chat = chats[index];
+              var user = profiles.firstWhere(
+                (pro) => pro.id == chat.fromUser,
+                orElse:
+                    () => ProfileModel(
+                      name: '-',
+                      nickname: '-',
+                      city: '-',
+                      image: '',
+                    ),
+              );
               return Align(
                 alignment:
-                    myId == chats[index].fromUser
+                    myId == chat.fromUser
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
-                child: Text(chats[index].text),
+                child: Column(
+                  children: [
+                    Text(user.name),
+                    Text(chat.text),
+                    if (user.image.isNotEmpty)
+                      Image.network(user.image, width: 50, height: 50),
+                  ],
+                ),
               );
             },
           ),
