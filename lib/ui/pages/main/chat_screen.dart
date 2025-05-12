@@ -53,65 +53,121 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              var chat = chats[index];
-              var user = profiles.firstWhere(
-                (pro) => pro.id == chat.fromUser,
-                orElse:
-                    () => ProfileModel(
-                      name: '-',
-                      nickname: '-',
-                      city: '-',
-                      image: '',
-                    ),
-              );
-              return Align(
-                alignment:
-                    myId == chat.fromUser
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                child: Column(
-                  children: [
-                    Text(user.name),
-                    Text(chat.text),
-                    if (user.image.isNotEmpty)
-                      Image.network(user.image, width: 50, height: 50),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: TextField(
-                controller: textEditingController,
-                decoration: InputDecoration(hintText: 'Text'),
-              ),
-            ),
-            MButton(
-              expanded: false,
-              onTap: () {
-                ChatModel chatModel = ChatModel(
-                  fromUser: FirebaseAuth.instance.currentUser!.uid,
-                  text: textEditingController.text,
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: chats.length,
+              itemBuilder: (context, index) {
+                var chat = chats[index];
+                var user = profiles.firstWhere(
+                  (pro) => pro.id == chat.fromUser,
+                  orElse:
+                      () => ProfileModel(
+                        name: '-',
+                        nickname: '-',
+                        city: '-',
+                        image: '',
+                      ),
                 );
-                textEditingController.clear();
-                FirebaseFirestore.instance
-                    .collection('chat')
-                    .add(chatModel.toMap());
+                return Align(
+                  alignment:
+                      myId == chat.fromUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 84,
+                                width: 207,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(25),
+                                    bottomLeft: Radius.circular(25),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(chat.text),
+                                ),
+                              ),
+                            ),
+
+                            Column(
+                              children: [
+                                Text(user.name, style: TextStyle(fontSize: 11)),
+
+                                if (user.image.isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        user.image,
+                                        width: 40,
+                                        height: 40,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
-              text: 'Send',
             ),
-          ],
-        ),
-      ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Container(
+                    color: Colors.grey.shade300,
+                    child: TextField(
+                      controller: textEditingController,
+                      decoration: InputDecoration(
+                        hintText: 'Text',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              MButton(
+                expanded: false,
+                onTap: () {
+                  ChatModel chatModel = ChatModel(
+                    fromUser: FirebaseAuth.instance.currentUser!.uid,
+                    text: textEditingController.text,
+                  );
+                  textEditingController.clear();
+                  FirebaseFirestore.instance
+                      .collection('chat')
+                      .add(chatModel.toMap());
+                },
+                text: 'Send',
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

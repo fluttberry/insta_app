@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<ResponsePostModel> posts = [];
   List<ProfileModel> profiles = [];
+  List<String> imgs = []; // added by me
   final PostRepository _postRepository = PostRepository();
   @override
   void initState() {
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (user != null) {
           profiles.add(user);
         }
-      } 
+      }
     }
     setState(() {});
   }
@@ -51,12 +52,46 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 user.image.isNotEmpty
-                    ? Image.network(user.image, width: 50, height: 50)
+                    ? Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ClipOval(
+                        child: Image.network(
+                          user.image,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
                     : Icon(Icons.person),
                 Text(user.name),
               ],
             ),
-            if ((post.image1.isNotEmpty)) Image.network(post.image1),
+
+            if (post.image1.isNotEmpty) Image.network(post.image1),
+            PageView.builder(
+              itemCount: post.getImages().length,
+              itemBuilder: (context, index) {
+                post.getImages()[index];
+                return Image.network(post.getImages()[index]);
+              },
+            ),
+            // Column(
+            //   children: [
+            //     if (post.image1.isNotEmpty) Image.network(post.image1),
+
+            //     SizedBox(
+            //       height: 200,
+            //       child: PageView.builder(
+            //         itemCount: post.getImages().length,
+            //         itemBuilder: (context, index) {
+            //           return Image.network(post.getImages()[index]);
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
+
             Text(post.text),
           ],
         );
