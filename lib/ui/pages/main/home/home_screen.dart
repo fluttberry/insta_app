@@ -68,13 +68,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-            if (post.image1.isNotEmpty) Image.network(post.image1),
-            PageView.builder(
-              itemCount: post.getImages().length,
-              itemBuilder: (context, index) {
-                post.getImages()[index];
-                return Image.network(post.getImages()[index]);
-              },
+            //if (post.image1.isNotEmpty) Image.network(post.image1),
+            SizedBox(
+              width: double.infinity,
+              height: post.getImages(). isEmpty ? 0 : 300,
+              child: PageView.builder(
+                itemCount: post.getImages().length,
+                itemBuilder: (context, index) {
+                  post.getImages()[index];
+                  return Image.network(post.getImages()[index]);
+                },
+              ),
             ),
             // Column(
             //   children: [
