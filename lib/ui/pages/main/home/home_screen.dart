@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:insta_app/model/profile_model.dart';
 import 'package:insta_app/model/response_post_model.dart';
 import 'package:insta_app/repository/post_repository.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ProfileModel> profiles = [];
   List<String> imgs = []; // added by me
   final PostRepository _postRepository = PostRepository();
+
+
+  int imageIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -38,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      
       itemCount: posts.length,
       itemBuilder: (context, index) {
         var post = posts[index];
@@ -47,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
               () =>
                   ProfileModel(name: '_', nickname: '_', city: '_', image: '_'),
         );
+        PageController _pageController = PageController();
+
         return Column(
           children: [
             Row(
@@ -71,31 +78,23 @@ class _HomeScreenState extends State<HomeScreen> {
             //if (post.image1.isNotEmpty) Image.network(post.image1),
             SizedBox(
               width: double.infinity,
-              height: post.getImages(). isEmpty ? 0 : 300,
+              height: post.getImages().isEmpty ? 0 : 300,
               child: PageView.builder(
+                controller: _pageController,
                 itemCount: post.getImages().length,
                 itemBuilder: (context, index) {
                   post.getImages()[index];
-                  return Image.network(post.getImages()[index]);
+                  return Image.network(post.getImages()[index], fit: BoxFit.cover,);
                 },
               ),
             ),
-            // Column(
-            //   children: [
-            //     if (post.image1.isNotEmpty) Image.network(post.image1),
-
-            //     SizedBox(
-            //       height: 200,
-            //       child: PageView.builder(
-            //         itemCount: post.getImages().length,
-            //         itemBuilder: (context, index) {
-            //           return Image.network(post.getImages()[index]);
-            //         },
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
+            if (post.getImages().isNotEmpty)
+              SmoothPageIndicator(
+                controller: _pageController,
+                count: post.getImages().length,
+                effect: WormEffect(),
+                onDotClicked: (index) {},
+              ),
             Text(post.text),
           ],
         );
